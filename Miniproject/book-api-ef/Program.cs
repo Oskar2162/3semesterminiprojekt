@@ -62,7 +62,7 @@ app.MapGet("/", (DataService service) =>
     return new { message = "Hello World!" };
 });
 
-app.MapGet("/api/posts", (DataService service) =>
+app.MapGet("/api/", (DataService service) =>
 {
     return service.GetPosts().Select(b => new { 
         PostId = b.PostId, 
@@ -73,18 +73,18 @@ app.MapGet("/api/posts", (DataService service) =>
     });
 });
 
-app.MapGet("/api/authors", (DataService service) =>
+app.MapGet("/api/posts", (DataService service) =>
 {
-    return service.GetAuthors().Select(a => new { AuthorId = a.PostId, Fullname = a.Postname });
+    return service.GetPosts().Select(a => new { postId = a.PostId, postname = a.Postname });
 });
 
-app.MapGet("/api/authors/{id}", (DataService service, int id) => {
-    return service.GetAuthor(id);
+app.MapGet("/api/posts/{id}", (DataService service, int id) => {
+    return service.GetPosts(id);
 });
 
-app.MapPost("/api/books", (DataService service, NewBookData data) =>
+app.MapPost("/api/posts/{id}/comments", (DataService service, NewBookData data) =>
 {
-    string result = service.CreateBook(data.Titel, data.AuthorId);
+    string result = service.CreateComment(data.Titel, data.AuthorId);
     return new { message = result };
 });
 

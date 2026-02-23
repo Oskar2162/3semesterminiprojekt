@@ -53,11 +53,11 @@ public class DataService
         return db.Posts.Include(a => a.Comments).FirstOrDefault(a => a.PostId == id);
     }
 
-    public string CreateComment(string title, int commentId, string User) {
-        Posts author = db.Posts.FirstOrDefault(a => a.PostId == commentId);
-        db.Comments.Add(new Comment { Title = title, CommentId = commentId, CommentBody = });
+    public string CreateComment(string commenterName, int postId) {
+        Posts posts = db.Posts.FirstOrDefault(a => a.PostId == postId);
+        db.Comments.Add(new Comment { CommenterName = commenterName, Posts = posts, CommentBody = });
         db.SaveChanges();
-        return "Post created";
+        return "Comment created";
     }
 
 }
