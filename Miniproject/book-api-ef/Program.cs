@@ -62,20 +62,20 @@ app.MapGet("/", (DataService service) =>
     return new { message = "Hello World!" };
 });
 
-app.MapGet("/api/books", (DataService service) =>
+app.MapGet("/api/posts", (DataService service) =>
 {
-    return service.GetBooks().Select(b => new { 
-        bookId = b.BookId, 
+    return service.GetPosts().Select(b => new { 
+        PostId = b.PostId, 
         title = b.Title, 
         author = new {
-            b.Author.AuthorId, b.Author.Fullname
+            Post = b.User.PostId, Fullname = b.User.Postname
         } 
     });
 });
 
 app.MapGet("/api/authors", (DataService service) =>
 {
-    return service.GetAuthors().Select(a => new { a.AuthorId, a.Fullname });
+    return service.GetAuthors().Select(a => new { AuthorId = a.PostId, Fullname = a.Postname });
 });
 
 app.MapGet("/api/authors/{id}", (DataService service, int id) => {

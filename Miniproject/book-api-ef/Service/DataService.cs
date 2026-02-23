@@ -18,46 +18,46 @@ public class DataService
     /// </summary>
     public void SeedData() {
         
-        Author author = db.Authors.FirstOrDefault()!;
-        if (author == null) {
-            author = new Author { Fullname = "Kristian" };
-            db.Authors.Add(author);
-            db.Authors.Add(new Author { Fullname = "Søren" });
-            db.Authors.Add(new Author { Fullname = "Mette" });
+        Posts posts = db.Posts.FirstOrDefault()!;
+        if (posts == null) {
+            posts = new Posts { Postname = "Kristian" };
+            db.Posts.Add(posts);
+            db.Posts.Add(new Posts { Postname = "Søren" });
+            db.Posts.Add(new Posts { Postname = "Mette" });
         }
 
-        Book book = db.Books.FirstOrDefault()!;
+        Comment book = db.Comments.FirstOrDefault()!;
         if (book == null)
         {
-            db.Books.Add(new Book { Title = "Harry Potter", Author = author });
-            db.Books.Add(new Book { Title = "Ringenes Herre", Author = author });
-            db.Books.Add(new Book { Title = "Entity Framework for Dummies", Author = author });
+            db.Comments.Add(new Comment { Title = "Harry Potter", Author = posts });
+            db.Comments.Add(new Comment { Title = "Ringenes Herre", Author = posts });
+            db.Comments.Add(new Comment { Title = "Entity Framework for Dummies", Author = posts });
         }
 
         db.SaveChanges();
     }
 
-    public List<Book> GetBooks() {
-        return db.Books.Include(b => b.Author).ToList();
+    public List<Comment> GetComments() {
+        return db.Comments.Include(b => b.CommentId).ToList();
     }
 
-    public Book GetBook(int id) {
-        return db.Books.Include(b => b.Author).FirstOrDefault(b => b.BookId == id);
+    public Comment GetComments(int id) {
+        return db.Comments.Include(b => b.CommentId).FirstOrDefault(b => b.CommentId == id);
     }
 
-    public List<Author> GetAuthors() {
-        return db.Authors.ToList();
+    public List<Posts> GetPosts() {
+        return db.Posts.ToList();
     }
 
-    public Author GetAuthor(int id) {
-        return db.Authors.Include(a => a.Books).FirstOrDefault(a => a.AuthorId == id);
+    public Posts GetPosts(int id) {
+        return db.Posts.Include(a => a.Comments).FirstOrDefault(a => a.PostId == id);
     }
 
-    public string CreateBook(string title, int authorId) {
-        Author author = db.Authors.FirstOrDefault(a => a.AuthorId == authorId);
-        db.Books.Add(new Book { Title = title, Author = author });
+    public string CreateComment(string title, int commentId, string User) {
+        Posts author = db.Posts.FirstOrDefault(a => a.PostId == commentId);
+        db.Comments.Add(new Comment { Title = title, CommentId = commentId, CommentBody = });
         db.SaveChanges();
-        return "Book created";
+        return "Post created";
     }
 
 }
