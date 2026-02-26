@@ -19,34 +19,45 @@ public class DataService
     public void SeedData() {
         
         Posts posts = db.Posts.FirstOrDefault()!;
-        if (posts == null) {
-            posts = new Posts { Postname = "Kristian" };
-            db.Posts.Add(posts);
-            db.Posts.Add(new Posts { Postname = "Søren" });
-            db.Posts.Add(new Posts { Postname = "Mette" });
-        }
-
-        Comment book = db.Comments.FirstOrDefault()!;
-        if (book == null)
+        if (posts == null)
         {
-            db.Comments.Add(new Comment { Title = "Harry Potter", Author = posts });
-            db.Comments.Add(new Comment { Title = "Ringenes Herre", Author = posts });
-            db.Comments.Add(new Comment { Title = "Entity Framework for Dummies", Author = posts });
+            posts = new Posts
+            {
+                PostId = 1,
+                Author = "Jesper",
+                Postname = "Psytrance rave d. 01/04",
+                Content = "Kom til vildt raveparty med godt humør, masser af sjov og psytrance",
+                Date = DateTime.Now,
+                upvotes = 99,
+                downvotes = 2,
+            };
+            db.Posts.Add(posts);
+            
+            db.Posts.Add(new Posts { 
+                PostId = 2,
+                Author = "Oskar",
+                Postname = "Kælegrise",
+                Content = "Jeg synes grise er mega nice",
+                Date = DateTime.Now,
+                upvotes = 999,
+                downvotes = 10, });
+            
+            db.Posts.Add(new Posts { 
+                PostId = 3,
+                Author = "Simon",
+                Postname = "Basement er nice",
+                Content = "Der er tilbud på vodka redbull og IPA på torsdag",
+                Date = DateTime.Now,
+                upvotes = 100,
+                downvotes = 5, });
         }
-
         db.SaveChanges();
     }
 
-    public List<Comment> GetComments() {
-        return db.Comments.Include(b => b.CommentId).ToList();
-    }
-
-    public Comment GetComments(int id) {
-        return db.Comments.Include(b => b.CommentId).FirstOrDefault(b => b.CommentId == id);
-    }
-
     public List<Posts> GetPosts() {
-        return db.Posts.ToList();
+        return db.Posts
+            .OrderByDescending(p => p.Date)
+            .ToList();
     }
 
     public Posts GetPosts(int id) {

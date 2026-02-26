@@ -11,6 +11,9 @@ namespace Model
         public DateTime Date {get; set;}
         
         public int upvotes { get; set; }
+        
         public int downvotes { get; set; }
+        
+        public string Content {get; set;}
     }
 }
