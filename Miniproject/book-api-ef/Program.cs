@@ -68,7 +68,7 @@ app.MapGet("/api/", (DataService service) =>
         PostId = b.PostId, 
         title = b.Title, 
         author = new {
-            Post = b.User.PostId, Fullname = b.User.Postname
+            Post = 
         } 
     });
 });
