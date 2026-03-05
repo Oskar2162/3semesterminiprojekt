@@ -77,13 +77,13 @@ app.MapPost("/api/posts/", (DataService service, NewPostData data) =>
     return new { message = result };
 });
 
-app.MapPost("/api/posts/{id}/comments", (DataService service, NewCommentData data) =>
+app.MapPost("/api/posts/{id}/comments", (DataService service, int Id, NewCommentData data) =>
 {
-    string result = service.CreateComment(data.postId, data.commenterName, data.tekst);
+    string result = service.CreateComment(Id, data.commenterName, data.tekst);
     return new { message = result };
 });
 
 app.Run();
 
 record NewPostData(string Author, string Postname, string Content);
-record NewCommentData(int postId, string commenterName, string tekst);
+record NewCommentData(string commenterName, string tekst);

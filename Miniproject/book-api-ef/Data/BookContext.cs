@@ -6,7 +6,7 @@ namespace Data
     public class BookContext : DbContext
     {
         public DbSet<Comment> Comments => Set<Comment>();
-        public DbSet<Posts> Posts => Set<Posts>();
+        public DbSet<Post> Posts => Set<Post>();
 
 
         public BookContext (DbContextOptions<BookContext> options)
