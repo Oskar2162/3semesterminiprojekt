@@ -71,6 +71,23 @@ app.MapGet("/api/posts/{id}", (DataService service, int id) => {
     return service.GetPost(id);
 });
 
+app.MapPut("/api/posts/{id}/upvote", (DataService service, int id) =>
+{
+    return service.GetPost(id);
+});
+app.MapPut("/api/posts/{id}/downvote", (DataService service, int id) =>
+{
+    return service.GetPost(id);
+});
+app.MapPut("/api/posts/{postid}/comments/{commentid}/upvote", (DataService service, int id) =>
+{
+    return service.GetPost(id);
+});
+app.MapPut("/api/posts/{postid}/comments/{commentid}/downvote", (DataService service, int id) =>
+{
+    return service.GetPost(id);
+});
+
 app.MapPost("/api/posts/", (DataService service, NewPostData data) =>
 {
     string result = service.CreatePost(data.Author, data.Postname, data.Content);

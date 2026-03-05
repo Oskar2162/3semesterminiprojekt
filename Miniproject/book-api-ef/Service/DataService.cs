@@ -139,4 +139,41 @@ public class DataService
 
         return "Post not found";
     }
+
+    public async Task UpvotePost(int postId)
+    {
+        Post post = db.Posts.FirstOrDefault(a => a.PostId == postId);
+        if (post != null)
+        {
+            post.upvotes++;
+        }
+        db.SaveChanges();
+    }
+    public async Task DownvotePost(int postId)
+    {
+        Post post = db.Posts.FirstOrDefault(a => a.PostId == postId);
+        if (post != null)
+        {
+            post.downvotes--;
+        }
+        db.SaveChanges();
+    }
+    public async Task UpvoteComment(int commentId)
+    {
+        Comment comment = db.Comments.FirstOrDefault(a => a.CommentId == commentId);
+        if (comment != null)
+        {
+            comment.Upvotes++;
+        }
+        db.SaveChanges();
+    }
+    public async Task DownvoteComment(int commentId)
+    {
+        Comment comment = db.Comments.FirstOrDefault(a => a.CommentId == commentId);
+        if (comment != null)
+        {
+            comment.Upvotes--;
+        }
+        db.SaveChanges();
+    }
 }
