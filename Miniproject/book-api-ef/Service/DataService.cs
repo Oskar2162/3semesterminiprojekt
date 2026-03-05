@@ -154,7 +154,7 @@ public class DataService
         Post post = db.Posts.FirstOrDefault(a => a.PostId == postId);
         if (post != null)
         {
-            post.downvotes--;
+            post.downvotes++;
         }
         db.SaveChanges();
     }
@@ -172,7 +172,7 @@ public class DataService
         Comment comment = db.Comments.FirstOrDefault(a => a.CommentId == commentId);
         if (comment != null)
         {
-            comment.Upvotes--;
+            comment.Upvotes++;
         }
         db.SaveChanges();
     }
