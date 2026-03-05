@@ -97,7 +97,7 @@ public class DataService
             .ToList();
     }
 
-    public Posts GetPosts(int id) {
+    public Posts GetPost(int id) {
         return db.Posts.Include(a => a.Comments).FirstOrDefault(a => a.PostId == id);
     }
 
